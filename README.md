@@ -1,0 +1,2 @@
+# ProcessesCount
+使用powershell获取Windows进程的CPU 内存使用情况，并输出到excel中
