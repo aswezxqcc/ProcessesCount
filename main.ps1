@@ -1,8 +1,9 @@
 $appname = "TIM" #进程简称
 $xc = 4 #CPU线程数
 $line = 50#行数
+$zhouqi = 2    
 $data = 1..$line
-$zhouqi=2    
+
 function getCPU ([string]$iProcess) {
     $z = "*$iProcess*"
     $process1 = Get-Process $z
@@ -44,7 +45,7 @@ for ($m = 0; $m -le ($line - 1); $m++) {
     $pre = 0..($newarraya.Count - 1)
 
     for ($i = 0; $i -le ($newarraya.Count - 1); $i++) {
-        $pre[$i] = ($newarrayb[$i] - $newarraya[$i]) /$zhouqi*100 / $xc;
+        $pre[$i] = ($newarrayb[$i] - $newarraya[$i]) / $zhouqi * 100 / $xc;
     }
     $preT = 0
     for ($n = 0; $n -le ($pre.Count - 1); $n++) {
@@ -107,7 +108,7 @@ $sheet.cells.item(1, 3) = "CPU"
 
 
 foreach ($process in $data) {
-    $sheet.cells.item($x, 1) = $x * 2 - 2
+    $sheet.cells.item($x, 1) = ($x - 1) * $zhouqi
     $sheet.cells.item($x, 2) = $process.mem
     $sheet.cells.item($x, 3) = $process.pre
 
