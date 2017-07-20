@@ -118,6 +118,6 @@ foreach ($process in $data) {
 $range = $sheet.usedRange
 $range.EntireColumn.AutoFit() | out-null
 $excel.Visible = $true
-$dt=[Environment]::GetFolderPath("Desktop")
-$datetime= $appname+'-'+(Get-Date -Format 'MMddhhmm')+'.xlsx'
-$excel.ActiveWorkBook.SaveAs($dt+'/'+$datetime)
+$path=[Environment]::GetFolderPath("Desktop")
+$filename= $appname+'-'+(Get-Date -Format 'MMddhhmm')+'.xlsx'
+$excel.ActiveWorkBook.SaveAs($path+'/'+$filename)
