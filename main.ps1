@@ -1,6 +1,6 @@
 $appname = "TIM" #进程简称
 $xc = 4 #CPU线程数
-$line = 50#行数
+$line = 5#行数
 $zhouqi = 2    
 $data = 1..$line
 
@@ -118,3 +118,6 @@ foreach ($process in $data) {
 $range = $sheet.usedRange
 $range.EntireColumn.AutoFit() | out-null
 $excel.Visible = $true
+$dt=[Environment]::GetFolderPath("Desktop")
+$datetime= $appname+'-'+(Get-Date -Format 'MMddhhmm')+'.xlsx'
+$excel.ActiveWorkBook.SaveAs($dt+'/'+$datetime)
