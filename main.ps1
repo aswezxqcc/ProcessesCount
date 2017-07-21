@@ -4,6 +4,10 @@ $line = 5#行数
 $zhouqi = 2    
 $data = 1..$line
 
+function getDate () {
+   return   Get-Date -Format('hhmm')
+   
+}
 function getCPU ([string]$iProcess) {
     $z = "*$iProcess*"
     $process1 = Get-Process $z
@@ -26,6 +30,8 @@ function getCPU ([string]$iProcess) {
 }
 function  getData($a, $b) {
     $dataobject = New-Object object 
+    $time=getDate
+    Add-Member -InputObject $dataobject -Name time -Value " $time " -MemberType NoteProperty;    
     Add-Member -InputObject $dataobject -Name mem -Value " $a " -MemberType NoteProperty;
     Add-Member -InputObject $dataobject -Name pre -Value " $b " -MemberType NoteProperty;
   
@@ -108,7 +114,7 @@ $sheet.cells.item(1, 3) = "CPU"
 
 
 foreach ($process in $data) {
-    $sheet.cells.item($x, 1) = ($x - 1) * $zhouqi
+    $sheet.cells.item($x, 1) = $process.time
     $sheet.cells.item($x, 2) = $process.mem
     $sheet.cells.item($x, 3) = $process.pre
 
@@ -121,3 +127,4 @@ $excel.Visible = $true
 $path=[Environment]::GetFolderPath("Desktop")
 $filename= $appname+'-'+(Get-Date -Format 'MMddhhmm')+'.xlsx'
 $excel.ActiveWorkBook.SaveAs($path+'/'+$filename)
+$excel.quit()
