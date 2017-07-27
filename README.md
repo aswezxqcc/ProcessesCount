@@ -25,4 +25,4 @@ win7用户需要升级到4.0 且需要安装.NET Framework4.5
 ```powershell
 $excelApp= New-Object -ComObject Excel.Application 
 ```
-没有报错即可
+没有报错 OK!
