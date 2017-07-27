@@ -1,7 +1,7 @@
-$appname = "TIM" #进程简称
+$appname = "ithome" #进程简称
 $xc = 4 #CPU线程数
-$line = 5#行数
-$zhouqi = 2    
+$line = 10#行数
+$zhouqi = 2 #取样周期   
 $data = 1..$line
 $path=[Environment]::GetFolderPath("Desktop")#保存路径，此路径为桌面
 
@@ -93,13 +93,13 @@ for ($b = 1 ; $b -le 3 ; $b++) {
 }
 
 $sheet.cells.item(1, 1) = "title   time"
-$sheet.cells.item(1, 2) = "WS memory"
-$sheet.cells.item(1, 3) = "CPU" 
+$sheet.cells.item(1, 2) = "WS memory(MB)"
+$sheet.cells.item(1, 3) = "CPU(%)" 
 
 
 foreach ($process in $data) {
     $sheet.cells.item($x, 1) = $process.time
-    $sheet.cells.item($x, 2) = $process.mem
+    $sheet.cells.item($x, 2) = $process.mem/1024/1024
     $sheet.cells.item($x, 3) = $process.pre
 
     $x++
