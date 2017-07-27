@@ -3,13 +3,14 @@ $xc = 4 #CPU线程数
 $line = 5#行数
 $zhouqi = 2    
 $data = 1..$line
+$path=[Environment]::GetFolderPath("Desktop")#保存路径，此路径为桌面
 
 function getDate () {
    return   Get-Date -Format('hhmm')
    
 }
 function getCPU ([string]$iProcess) {
-    $z = "*$iProcess*"
+    $z = "*$iProcess*" #带'*'用于模糊查找，比如一些列进程名字不通，eg：MicrosoftEdge，MicrosoftEdgeCP
     $process1 = Get-Process $z
  
     $a = $process1.CPU  
@@ -35,9 +36,6 @@ function  getData($a, $b) {
     Add-Member -InputObject $dataobject -Name mem -Value " $a " -MemberType NoteProperty;
     Add-Member -InputObject $dataobject -Name pre -Value " $b " -MemberType NoteProperty;
   
-    # $dataobject.mem = $a 
-    # $dataobject.pre = $b
-    #$dataobject
     return $dataobject
 }
 for ($m = 0; $m -le ($line - 1); $m++) {
@@ -65,29 +63,15 @@ for ($m = 0; $m -le ($line - 1); $m++) {
         $tmp = $mem[$n]
         $memT += $tmp
 
-    }
-    
-
-     
-
-    #$data[$m] = getData $memT $preT
-    $data[$m] = getData $memT $preT
-   
- 
-    # $dataobject.mem = $memT 
-    # $dataobject.pre = $preT
-    # $data[$b] = $tmp
-  
-  
-    #"ProcessName: $pro CPU: $preT memory: $memT "
-
+    }  
+    $data[$m] = getData $memT $preT 
+    $data[$m] #可注释掉，用来显示当前内存和CPU使用率
 }
     
 
 
 # excel start
-$excel = New-Object -ComObject Excel.Application
-#$excel.Visible = $true
+$excel = New-Object -ComObject Excel.Application 
 $workbook = $excel.Workbooks.add()
 $sheet = $workbook.worksheets.Item(1)
 $workbook.WorkSheets.item(1).Name = $pro 
@@ -124,7 +108,6 @@ foreach ($process in $data) {
 $range = $sheet.usedRange
 $range.EntireColumn.AutoFit() | out-null
 $excel.Visible = $true
-$path=[Environment]::GetFolderPath("Desktop")
-$filename= $appname+'-'+(Get-Date -Format 'MMddhhmm')+'.xlsx'
-$excel.ActiveWorkBook.SaveAs($path+'/'+$filename)
+$filename= $appname+'-'+(Get-Date -Format 'MMddhhmm')+'.xlsx' #excel文件名
+$excel.ActiveWorkBook.SaveAs($path+'/'+$filename)#保存excel
 $excel.quit()
