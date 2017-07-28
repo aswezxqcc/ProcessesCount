@@ -1,4 +1,4 @@
-$appname = "ithome" #进程简称
+$appname = "tim" #进程简称
 $xc = 4 #CPU线程数
 $line = 10#行数
 $zhouqi = 2 #取样周期   
@@ -110,4 +110,4 @@ $range.EntireColumn.AutoFit() | out-null
 $excel.Visible = $true
 $filename= $appname+'-'+(Get-Date -Format 'MMddhhmm')+'.xlsx' #excel文件名
 $excel.ActiveWorkBook.SaveAs($path+'/'+$filename)#保存excel
-$excel.quit()
+#$excel.quit()
