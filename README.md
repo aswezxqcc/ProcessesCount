@@ -12,12 +12,11 @@ $zhouqi = 2  #检测的周期  单位s
 ```powershell
 $psversiontable.psversion
 ``` 
-win8.1以及Windows server 2012 R2自带4.0 可以不升级 
-win10自带5.0 不用升级，  
-win7用户需要升级到5.0   
-##### powershell 5.0 需要Windows Management Framework 5.0  
+
+win7系统需要手动安装powershell 4.0 或以上版本   
+##### powershell 5.0 ：Windows Management Framework 5.0  
 * https://www.microsoft.com/en-us/download/details.aspx?id=50395   
-#### 2.完整版Microsoft office
+#### 2.可以使用com的 Microsoft office
 一般情况下安装的正版office即可  
 验证方式 ：运行 
 ```powershell
